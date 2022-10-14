@@ -1,0 +1,45 @@
+<div class="form-body">
+    <form [formGroup]="myForm" (ngSubmit)="signUp()">
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input id="firstName" type="text" class="form-control" formControlName="firstName">
+            <div *ngIf="firstName?.touched && firstName?.invalid" class="alert alert-danger">
+              <div *ngIf="firstName?.hasError('required')"> First Name Is Required. </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input id="lastName" type="text" class="form-control" formControlName="lastName">
+            <div *ngIf="lastName?.touched && lastName?.invalid" class="alert alert-danger">
+            <div *ngIf="lastName?.hasError('required')"> Last Name Is Required. </div>
+           </div>
+          </div>
+          <div class="form-group">
+              <label for="userName">User Name</label>
+              <input id="userName" type="text" class="form-control" formControlName="userName">
+              <div *ngIf="userName?.touched && userName?.invalid" class="alert alert-danger">
+              <div *ngIf="userName?.hasError('required')"> User Name Is Required. </div>
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" class="form-control" formControlName="email">
+            <div *ngIf="email?.touched && email?.invalid" class="alert alert-danger">
+            <div *ngIf="email?.hasError('required')"> Email Is Required. </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" type="password" class="form-control" formControlName="password">
+            <div *ngIf="password?.touched && password?.invalid" class="alert alert-danger">
+            <div *ngIf="password?.hasError('required')"> password Is Required. </div>
+            </div>
+           </div>
+        
+            <div class="form-group">
+            <button class="btn btn-primary" [disabled]="myForm.invalid" type="submit" style="margin-top:10px;margin-bottom: 10px;" >Save</button>
+             
+          </div>
+    </form>
+    
+ </div>

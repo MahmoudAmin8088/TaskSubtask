@@ -1,0 +1,15 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li routerLinkActive="active current"><a routerLink="/home">Home</a></li>
+        <li *ngIf="authService.isLoggedIn() && authService.IsAdmin"  routerLinkActive="active current"><a routerLink="/admin">Admin</a></li>
+        <li *ngIf="!authService.isLoggedIn()" routerLinkActive="active current" ><a routerLink="/login">Login</a></li>
+        <li *ngIf="!authService.isLoggedIn()" routerLinkActive="active current" ><a routerLink="/register">Sign Up</a></li>
+        <li *ngIf="authService.isLoggedIn()" routerLinkActive="active current"><a routerLink="/tasks">Tasks</a></li>
+        <li *ngIf="authService.isLoggedIn()" routerLinkActive="active current"><a routerLink="/login" (click)="authService.logout()">Logout</a></li>
+
+      </ul>
+    </div>
+  </div>
+</nav>

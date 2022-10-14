@@ -1,0 +1,41 @@
+<h1>Admins Control</h1>
+<h2>Employee</h2>
+
+<div class="col-md-12">
+  <div class="table-card">
+    <table class="table table-stripedd table-sm table-bordered">
+      <thead class="table-head">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>UserName</th>
+          <th>Role</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let employee of employees; let i = index">
+            <td>{{employee.firstName + " " + employee.lastName}}</td>
+            <td>{{employee.email}}</td>
+            <td>{{employee.userName}}</td>
+            <td>{{employee.role}}</td>
+
+            <td>
+              <button  class="btn btn-danger btn-sm" (click)="delete(employee)" >Delete
+                <i class="fas fa-edit"></i>
+              </button>
+              <button  class="btn btn-primary btn-sm" (click)="admin(employee)" >Admin
+                <i class="fas fa-edit"></i>
+              </button>
+              <button  class="btn btn-primary btn-sm" (click)="removeadmin(employee)" >Employee
+                <i class="fas fa-edit"></i>
+              </button>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+    <div class="text-center py-4 my-4" *ngIf="employees.length ==0 ">
+      <h4 class="py-4">NoDataFound</h4>
+   </div>
+  </div>
+</div>
