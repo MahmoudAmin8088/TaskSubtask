@@ -1,4 +1,3 @@
-import { ChangeRole } from './../changeRole';
 import { BadInput } from './../common/bad-input';
 import { AuthService } from './../services/auth-service';
 import { NotFoundError } from './../common/not-found-error';

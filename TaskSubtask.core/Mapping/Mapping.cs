@@ -16,8 +16,17 @@ namespace TaskSubtask.core.Mapping
             CreateMap<Task, TaskDto>();
             CreateMap<TaskDto, Task>().ForMember(x => x.Date, opt => opt.Ignore());
 
+            CreateMap<Task, TaskUpdateDto>();
+            CreateMap<TaskUpdateDto, Task>().ForMember(x => x.Date, opt => opt.Ignore());
+
+
+
             CreateMap<Subtask, SubtaskDto>();
             CreateMap<SubtaskDto, Subtask>().ForMember(x => x.Date, opt => opt.Ignore());
+
+            CreateMap<Subtask, SubtaskUpdateDto>();
+            CreateMap<SubtaskUpdateDto, Subtask>().ForMember(x => x.Date, opt => opt.Ignore());
+
 
             CreateMap<RegisterModel, ApplicationUser>().ReverseMap();
             CreateMap<ApplicationUser, Users>().ReverseMap();

@@ -23,7 +23,7 @@ namespace TaskSubtask.Api.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("register")]
+        [HttpPost("[action]")]
         [ProducesResponseType(200, Type = typeof(AuthModel))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -40,7 +40,7 @@ namespace TaskSubtask.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPost("login")]
+        [HttpPost("[action]")]
         [ProducesResponseType(200, Type = typeof(AuthModel))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -119,23 +119,6 @@ namespace TaskSubtask.Api.Controllers
 
         //}
 
-        //[HttpGet("[action]")]
-        //[ProducesResponseType(200, Type = typeof(List<ApplicationUser>))]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status404NotFound)]
-
-        //public async Task<IActionResult> GetUsers()
-        //{
-        //    var result = await _authRepository.GetUsersAsync();
-        //    var users = new List<Users>();
-        //    if (result is null)
-        //        return NotFound();
-        //    foreach (var user in result)
-        //    {
-        //        users.Add(_mapper.Map<Users>(user));
-        //    }
-        //    return Ok(users);
-        //}
-
+        
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TaskSubtask.core.Models;
@@ -9,6 +10,7 @@ namespace TaskSubtask.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SubtasksController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -99,6 +101,7 @@ namespace TaskSubtask.Api.Controllers
             return Ok(subtasksDto);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("[action]")]
         [ProducesResponseType(200, Type = typeof(SubtaskDto))]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -123,18 +126,19 @@ namespace TaskSubtask.Api.Controllers
 
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("[action]")]
         [ProducesResponseType(200, Type = typeof(TaskDto))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesDefaultResponseType]
-        public IActionResult Update([FromBody] SubtaskDto subtaskDto)
+        public IActionResult Update([FromBody] SubtaskUpdateDto subtaskDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var obj = _unitOfWork.Subtasks.GetById(subtaskDto.SubTaskId);
 
-            var Subtask = _mapper.Map<SubtaskDto, Subtask>(subtaskDto, obj);
+            var Subtask = _mapper.Map<SubtaskUpdateDto, Subtask>(subtaskDto, obj);
             if (_unitOfWork.Subtasks.Update(Subtask) is null)
             {
                 ModelState.AddModelError("", "Something Went Wrong When Updating The Record");
@@ -144,7 +148,7 @@ namespace TaskSubtask.Api.Controllers
             return Ok(subtaskDto);
 
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{subTaskId}", Name = ("DeleteSubTask"))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -154,7 +158,7 @@ namespace TaskSubtask.Api.Controllers
         {
             var subtask = _unitOfWork.Subtasks.GetById(subtaskId);
             if (subtask is null)
-                return NotFound(ModelState);
+                return NotFound();
 
             if (_unitOfWork.Subtasks.Delete(subtask) is null)
             {

@@ -28,21 +28,21 @@ export class DataService {
    }
 
    GetAll():Observable<any[]>{
-    return this.HttpClient.get<any[]>(this.baseURL)
+    return this.HttpClient.get<any[]>(this.baseURL,this.httpOptions);
     }
     GetPriority():Observable<any[]>{
       return this.HttpClient.get<any[]>(this.baseURl);
       }
 
     GetSubTaskOfTask(taskId:string):Observable<any[]>{
-      return this.HttpClient.get<any[]>(this.baseURL +'/GetSubTasksOfTask/' + taskId).pipe(
+      return this.HttpClient.get<any[]>(this.baseURL +'/GetSubTasksOfTask/' + taskId,this.httpOptions).pipe(
         catchError(this.handleError)
       );
       }
    
 
    create(resource:any): Observable<any>{
-    debugger;
+    
     return this.HttpClient.post<any>(this.baseURL + '/Create',JSON.stringify(resource),this.httpOptions)
     .pipe(
       catchError(this.handleError)

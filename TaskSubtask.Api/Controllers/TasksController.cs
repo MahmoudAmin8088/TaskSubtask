@@ -11,6 +11,7 @@ namespace TaskSubtask.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TasksController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -105,7 +106,7 @@ namespace TaskSubtask.Api.Controllers
             return Ok(taskDto);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPut("[action]")]
         [ProducesResponseType(200, Type = typeof(TaskDto))]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -113,13 +114,13 @@ namespace TaskSubtask.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesDefaultResponseType]
 
-        public IActionResult Update([FromBody] TaskDto taskDto)
+        public IActionResult Update([FromBody] TaskUpdateDto taskDto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var obj = _unitOfWork.Tasks.GetById(taskDto.TaskId);
 
-            var task = _mapper.Map<TaskDto,Task>(taskDto,obj);
+            var task = _mapper.Map<TaskUpdateDto, Task>(taskDto,obj);
             
             if(_unitOfWork.Tasks.Update(task) is null)
             {
@@ -129,7 +130,7 @@ namespace TaskSubtask.Api.Controllers
             _unitOfWork.Complete();
             return Ok(taskDto);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{taskId}",Name ="Delete")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

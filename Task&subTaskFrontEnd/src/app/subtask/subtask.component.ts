@@ -85,7 +85,7 @@ export class SubtaskComponent implements OnInit {
   Update(){
     this.service.update(this.myForm.value).subscribe(res=>{
         this.myForm.reset();
-        this.getAll();
+        this.GetSubTasksOfTask();
         
     },(error:AppError)=>{
       if(error instanceof BadInput)
@@ -98,7 +98,7 @@ export class SubtaskComponent implements OnInit {
   Delete(id:any) {
     
     this.service.delete(id).subscribe(res => {
-      this.getAll();
+      this.GetSubTasksOfTask();
   },
   (error:AppError)=>{
 

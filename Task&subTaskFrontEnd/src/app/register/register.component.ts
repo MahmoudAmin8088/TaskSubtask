@@ -34,7 +34,6 @@ export class RegisterComponent implements OnInit {
     
     this.authService.signUp(this.myForm.value)
     .subscribe(result=>{
-      console.log(this.myForm);
       if (result!){
         this.router.navigate(['/login']);
       }

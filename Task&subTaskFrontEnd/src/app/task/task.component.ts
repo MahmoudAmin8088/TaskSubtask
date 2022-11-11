@@ -67,8 +67,6 @@ export class TaskComponent implements OnInit {
         alert('BadInput');
 
       else throw error;
-
-      
     });
   }
 

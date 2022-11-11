@@ -18,7 +18,7 @@ export class AuthService  {
 
     })
   }
-  token:any;
+  //token:any;
   baseurl='https://localhost:7204/api/Auths';
   constructor(private HttpClient:HttpClient) { }
 
